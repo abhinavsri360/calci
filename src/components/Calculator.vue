@@ -1,6 +1,6 @@
 <template>
   <div class="calculator">
-    <button class="display">{{current || '0'}}</button>
+    <button class="display">{{ current || "0" }}</button>
     <button class="btn" @click="clear">C</button>
     <button class="btn" @click="sign">+/-</button>
     <button class="btn" @click="percent">%</button>
@@ -25,67 +25,71 @@
 
 <script>
 export default {
-  data(){
-    return{
+  data() {
+    return {
       previous: null,
-      current:'',
+      current: "",
       operator: null,
-      operatorClicked: false
-    }
+      operatorClicked: false,
+    };
   },
-  methods:{
-    clear(){
-      this.current = '';
+  methods: {
+    clear() {
+      this.current = "";
     },
-    sign(){
-      this.current =this.current.charAt(0) === '-' ?
-        this.current.slice(1) : `-${this.current}`
+    sign() {
+      this.current =
+        this.current.charAt(0) === "-"
+          ? this.current.slice(1)
+          : `-${this.current}`;
     },
-    percent(){
-      this.current = `${parseFloat(this.current)/100}`
+    percent() {
+      this.current = `${parseFloat(this.current) / 100}`;
     },
-    append(number){
-      if(this.operatorClicked){
-        this.current = ''
-        this.operatorClicked = false
+    append(number) {
+      if (this.operatorClicked) {
+        this.current = "";
+        this.operatorClicked = false;
       }
-      this.current = `${this.current}${number}`
+      this.current = `${this.current}${number}`;
     },
-    dot(){
-      if(this.current.indexOf('.')===-1)
-        this.append('.')
+    dot() {
+      if (this.current.indexOf(".") === -1) this.append(".");
     },
-    divide(){
-      this.operator = (a,b) => a/b
-      this.setPrevious()
+    divide() {
+      this.operator = (a, b) => a / b;
+      this.setPrevious();
     },
-    times(){
-      this.operator = (a,b) => a*b
-      this.setPrevious()
+    times() {
+      this.operator = (a, b) => a * b;
+      this.setPrevious();
     },
-    minus(){
-      this.operator = (a,b) => a-b
-      this.setPrevious()
+    minus() {
+      this.operator = (a, b) => a - b;
+      this.setPrevious();
     },
-    add(){
-      this.operator = (a,b) => a+b
-      this.setPrevious()
+    add() {
+      this.operator = (a, b) => a + b;
+      this.setPrevious();
     },
-    setPrevious(){
-      this.previous = this.current
-      this.operatorClicked = true
-      this.current = ''
+    setPrevious() {
+      this.previous = this.current;
+      this.operatorClicked = true;
+      this.current = "";
     },
-    equal(){
-      this.current = `${this.operator(parseFloat(this.current),parseFloat(this.previous))}`
-      this.previous = null
-    }
-  }
-}
+    equal() {
+      this.current = `${this.operator(
+        parseFloat(this.current),
+        parseFloat(this.previous)
+      )}`;
+      this.previous = null;
+    },
+  },
+};
 </script>
 
 <style scoped>
-.calculator{
+.calculator {
   margin: 0 auto;
   width: 300px;
   height: 500px;
@@ -95,28 +99,27 @@ export default {
   grid-auto-rows: minmax(50px, auto);
   border: 1px solid #333;
 }
-.display{
+.display {
   grid-column: 1/5;
   background-color: ghostwhite;
 }
-.zero{
+.zero {
   grid-column: 1/3;
 }
-.btn{
+.btn {
   background-color: #eee;
   border: 1px solid #999;
 }
-.operator{
+.operator {
   background-color: orange;
   color: whitesmoke;
 }
-button{
+button {
   opacity: 0.6;
   border-radius: 5%;
   font-size: 25px;
 }
-button:hover{
-  padding-right: 25px;
+button:hover {
   opacity: 1;
 }
 </style>
