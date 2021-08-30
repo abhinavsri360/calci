@@ -1,6 +1,6 @@
 # calci
 
-## Project setup
+## Project setup (NPM and Yarn)
 ```
 npm install
 
